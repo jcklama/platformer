@@ -18,13 +18,15 @@ gulp.task('styles', () => {                         // #1
         .pipe(reload({ stream: true }));            // #4 add reload to the styles task; ensure reload when styles is updated
 });
 
-gulp.task('scripts', () => {                         // #2
-    gulp.src('./dev/scripts/main.js')                // add a task for scripts by grabbing scripts from dev folder
-        .pipe(babel({                                // converts ES6 to browser-friendly code & concat files
-            presets: ['env']
-        }))
-        .pipe(gulp.dest('./public/scripts')).
-        pipe(reload({ stream: true }));              // #4 add reload to the script task; ensure reload when script is updated
+gulp.task('scripts', () => {
+    console.log('compiling sripts');                        // #2
+    return gulp.src('./dev/scripts/**/*.js')                   // add a task for scripts by grabbing scripts from dev folder
+        .pipe(concat('all.js'))                      // #5
+        // .pipe(babel({                                // converts ES6 to browser-friendly code & concat files
+        //     presets: ['env']
+        // }))
+        .pipe(gulp.dest('./public/scripts'))
+        .pipe(reload({ stream: true }));              // #4 add reload to the script task; ensure reload when script is updated
 });
 
 gulp.task('browser-sync', () => {                   // #4
@@ -37,7 +39,7 @@ gulp.task('browser-sync', () => {                   // #4
 // watches the .scss files in the specified directory for changes and then runs the 'styles' task
 gulp.task('watch', () => {
     gulp.watch('./dev/styles/**/*.scss', ['styles']);   // #1
-    gulp.watch('./dev/scripts/main.js', ['scripts']);   // #2
+    gulp.watch('./dev/scripts/**/*.js', ['scripts']);      // #2
     gulp.watch('*.html', reload);                       // #4
 });
 
