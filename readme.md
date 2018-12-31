@@ -3,7 +3,7 @@ One-level JavaScript platformer consisting of a custom tilemap, tile collision, 
 
 ## Getting Started ##
 1. Clone the repo 
-3. In root, 
+3. In root, type 'gulp'
 
 ## Key concepts explored: ##
 - game animation using canvas and requestAnimationFrame
